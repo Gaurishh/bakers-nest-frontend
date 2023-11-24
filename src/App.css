@@ -9,6 +9,8 @@ body {
   font-family: 'Montserrat', sans-serif !important;
 }
 
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -24,6 +26,10 @@ code {
 
 h1{
   font-size: 20px;
+}
+
+.btn-navbar:hover {
+  background-color: rgba(0, 0, 0, 0.027);
 }
 
 .flex-container{

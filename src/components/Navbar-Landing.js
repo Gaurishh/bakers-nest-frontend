@@ -77,7 +77,7 @@ const LandingNavbar = (props) => {
             <ListItem key="Shop now" disablePadding style={{marginTop: '1rem'}}>
               <ListItemButton id={styles.removed}>
                 <ListItemIcon><FiArrowRight /></ListItemIcon>
-                <a href="https://wa.me/c/918595714343" target="_blank" >Shop now</a> 
+                <a href="/shop" target="_blank" >Shop now</a> 
               </ListItemButton>
             </ListItem>
           </List>

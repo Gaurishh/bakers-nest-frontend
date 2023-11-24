@@ -42,23 +42,23 @@ const Navbar = () => {
                   {user["given_name"]}
                 </a>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a className="dropdown-item" href="/shop/orders">
+                  <a className="dropdown-item btn-navbar" href="/shop/orders">
                     Orders
                   </a>
-                  <a className="dropdown-item" href="/shop" onClick={()=>{logout()}}>
+                  <a className="dropdown-item btn-navbar" href="/shop" onClick={()=>{logout()}}>
                     Logout
                   </a>
                 </div>
               </div>
             ) : (
               <li className="nav-item">
-                <a className="nav-link" href="/shop" onClick={() => loginWithRedirect()}>
+                <a className="nav-link btn-navbar" href="/shop" onClick={() => loginWithRedirect()}>
                   Login
                 </a>
               </li>
             )}
             <li className="nav-item">
-              <a className="nav-link" href="/shop/cart">
+              <a className="nav-link btn-navbar" href="/shop/cart">
                 Cart {cartState.cartItems.length}
               </a>
             </li>
