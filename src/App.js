@@ -12,6 +12,8 @@ import Privacy from './components/info/privacy.js';
 import Shipping from './components/info/shipping.js';
 import Tc from './components/info/tc.js';
 
+//4691310348044446
+
 function App() {
   return (
     <div>

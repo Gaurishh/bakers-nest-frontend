@@ -27,6 +27,7 @@ const Fudge = (props) => {
           src={props.fudge.image}
           className="img-fluid"
           style={{ height: "200px", width: "200px" }}
+          loading="lazy"
         />
       </div>
 

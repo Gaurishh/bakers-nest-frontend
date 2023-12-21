@@ -27,6 +27,7 @@ const CheeseCake = (props) => {
           src={props.cheeseCake.image}
           className="img-fluid"
           style={{ height: "200px", width: "200px" }}
+          loading="lazy"
         />
       </div>
 

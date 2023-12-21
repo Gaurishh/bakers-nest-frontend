@@ -58,12 +58,12 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start; */
-  width: 50%;
+  width: 47%;
 }
 
 .logo {
   border-radius: 50%;
-  width: 200px;
+  width: 150px;
 }
 
 .navbarMenuContainer {

@@ -10,7 +10,7 @@ const Brownie = (props) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  
   const dispatch = useDispatch();
 
   const addtocart = () => {
@@ -27,6 +27,7 @@ const Brownie = (props) => {
           src={props.brownie.image}
           className="img-fluid"
           style={{ height: "200px", width: "200px" }}
+          loading="lazy"
         />
       </div>
 

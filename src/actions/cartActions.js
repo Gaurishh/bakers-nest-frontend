@@ -21,7 +21,6 @@ export const addToCart=(product , quantity , varient)=>(dispatch , getState)=>{
         else{
             dispatch({type:'ADD_TO_CART' , payload : cartItem})
         }
-       
     }
 
     const cartItems = getState().cartReducer.cartItems

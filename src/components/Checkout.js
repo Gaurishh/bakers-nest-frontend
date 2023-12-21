@@ -54,6 +54,7 @@ const Checkout = (props) => {
       const {data} = await axios.post(orderUrl, {amount: props.subtotal})
       initPayment(data.data)
     } catch (error) {
+      dispatch({type: 'PLACE_ORDER_FAILED'})
       console.log(error);
     }
   }

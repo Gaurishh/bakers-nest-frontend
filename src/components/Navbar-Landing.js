@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Logo4 from "../Assets/Logo4.jpg";
-import { BsCart2 } from "react-icons/bs/index.esm.js";
 import { HiOutlineBars3 } from "react-icons/hi2/index.esm.js";
 import Box from "@mui/material/Box/index.js";
 import Drawer from "@mui/material/Drawer/index.js";
@@ -10,10 +9,7 @@ import ListItemButton from "@mui/material/ListItemButton/index.js";
 import ListItemText from "@mui/material/ListItemText/index.js";
 import HomeIcon from "@mui/icons-material/Home.js";
 import InfoIcon from "@mui/icons-material/Info.js";
-import CommentRoundedIcon from "@mui/icons-material/CommentRounded.js";
 import PhonePausedRounded from "@mui/icons-material/PhoneRounded.js";
-import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded.js";
-import { WhatsApp } from '@mui/icons-material';
 import { FiArrowRight } from 'react-icons/fi/index.esm.js';
 import { ListItemIcon } from '@mui/material';
 

@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import React from 'react';
 import BannerBackground from "../Assets/home-banner-background.png";
 import BannerImage2 from "../Assets/home-banner-image2.jpg";
