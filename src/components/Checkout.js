@@ -20,7 +20,7 @@ const Checkout = (props) => {
 
   const initPayment = async (data) => {
     const options = {
-      key: "rzp_test_JvxmHXidqw5jBQ",
+      key: "rzp_live_PPGiyZHJeSUhQb",
       amount: data.amount,
       currency: data.currency,
       name: "Cart Items",
