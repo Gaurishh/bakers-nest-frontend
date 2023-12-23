@@ -10,6 +10,7 @@ import { getAllProducts } from '../actions/productActions.js';
 import Loading from '../components/Loading.js';
 import Error from '../components/Error.js';
 import Navbar from '../components/Navbar.js';
+import Filter from "../components/Filter.js";
 
 const HomeScreen = () => {
 
@@ -26,17 +27,20 @@ const HomeScreen = () => {
         <Navbar />
         <div className='row justify-content-center'>
             {loading ? (<Loading />) : error ? (<Error error="Something went wrong" />) : (
-              products.map(product => {
-                return <div className='col-md-3 m-3' key={product._id}>
-                    {product.category === "Brownies" ? <div> <Brownie brownie={product}/> </div> : null}
-                    {product.category === "Tub Cake" ? <div> <TubCake tubCake={product}/> </div> : null}
-                    {product.category === "Dry Cake" ? <div> <DryCake dryCake={product}/> </div> : null}
-                    {product.category === "Cheese Cake" ? <div> <CheeseCake cheeseCake={product}/> </div> : null}
-                    {product.category === "Jumbo Cookie" ? <div> <JumboCookie jumboCookie={product}/> </div> : null}
-                    {product.category === "Fudge" ? <div> <Fudge fudge={product}/> </div> : null}
-                </div>
-              })
-            )}
+              <>
+                <Filter />
+                {products.map(product => {
+                  return <div className='col-md-3 m-3' key={product._id}>
+                      {product.category === "Brownies" ? <div> <Brownie brownie={product}/> </div> : null}
+                      {product.category === "Tub Cake" ? <div> <TubCake tubCake={product}/> </div> : null}
+                      {product.category === "Dry Cake" ? <div> <DryCake dryCake={product}/> </div> : null}
+                      {product.category === "Cheese Cake" ? <div> <CheeseCake cheeseCake={product}/> </div> : null}
+                      {product.category === "Jumbo Cookie" ? <div> <JumboCookie jumboCookie={product}/> </div> : null}
+                      {product.category === "Fudge" ? <div> <Fudge fudge={product}/> </div> : null}
+                  </div>
+                })}
+              </>
+              )}
         </div>
     </div>
   )
