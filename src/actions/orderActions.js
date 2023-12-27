@@ -13,3 +13,32 @@ export const getUserOrders = (user) => async (dispatch, getState) => {
     }
 
 };
+
+export const getAllOrders=()=>async (dispatch,getState)=>{
+
+    dispatch({type:'GET_ALLORDERS_REQUEST'})
+
+    try {
+        const response = await axios.get('http://localhost:8000/api/orders/getallorders')
+        
+        dispatch({type:'GET_ALLORDERS_SUCCESS' , payload : response.data})
+    } catch (error) {
+        dispatch({type:'GET_ALLORDERS_FAILED' , payload : error})
+    }
+
+}
+
+export const deliverOrder=(orderid)=>async dispatch=>{
+
+    try {
+        const response = await axios.post('http://localhost:8000/api/orders/deliverorder' , {orderid})
+        console.log(response);
+        // alert('Order Delivered')
+        const orders = await axios.get('http://localhost:8000/api/orders/getallorders')
+        dispatch({type:'GET_ALLORDERS_SUCCESS' , payload: orders.data})
+    } catch (error) {
+        console.log(error);
+    }
+
+
+}

@@ -50,6 +50,7 @@ const CartScreen = () => {
                         addToCart(item, item.quantity + 1, item.varient)
                       );
                     }}
+                    style={{cursor:'pointer'}}
                   ></i>
                   <b> {item.quantity} </b>
                   <i
@@ -64,6 +65,7 @@ const CartScreen = () => {
                         );
                       }
                     }}
+                    style={{cursor:'pointer'}}
                   ></i>
                   <hr />
                 </div>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const filterProducts=(searchkey , category)=>async dispatch=>{
-  
+    
     dispatch({type:'GET_PRODUCTS_REQUEST'})
 
     try {
@@ -15,7 +15,6 @@ export const filterProducts=(searchkey , category)=>async dispatch=>{
         }
         dispatch({type:'GET_PRODUCTS_SUCCESS' , payload : filteredProducts})
     } catch (error) {
-        console.log(error)
         dispatch({type:'GET_PRODUCTS_FAILED' , payload : error})
     }
 
@@ -32,4 +31,49 @@ export const getAllProducts = () => async dispatch => {
         dispatch({type: 'GET_PRODUCTS_FAILED', payload: error});
     }
 
+}
+
+export const getProductById = (productid) => async dispatch => {
+
+    dispatch({type: 'GET_PRODUCTBYID_REQUEST'});
+
+    try {
+        const response = await axios.post('http://localhost:8000/api/products/getproductbyid', {productid});
+        dispatch({type: 'GET_PRODUCTBYID_SUCCESS', payload: response.data});
+    } catch (error) {
+        dispatch({type: 'GET_PRODUCTBYID_FAILED', payload: error});
+    }
+
+}
+
+export const addProduct = (product) => async dispatch => {
+    dispatch({type: 'ADD_PRODUCT_REQUEST'})
+    try {
+        const response = await axios.post('http://localhost:8000/api/products/addproduct', {product})
+        dispatch({type: 'ADD_PRODUCT_SUCCESS', payload: response.data})
+    } catch (error) {
+        dispatch({type: 'ADD_PRODUCT_FAILED', payload: error})
+    }
+}
+
+export const editProduct = (editedProduct) => async dispatch => {
+    dispatch({type: 'EDIT_PRODUCT_REQUEST'})
+    try {
+        const response = await axios.post('http://localhost:8000/api/products/editproduct', {editedProduct})
+        dispatch({type: 'EDIT_PRODUCT_SUCCESS', payload: response.data})
+    } catch (error) {
+        dispatch({type: 'EDIT_PRODUCT_FAILED', payload: error})
+    }
+}
+
+export const deleteProduct = (productid) => async dispatch => {
+    try {
+        const response = await axios.post('http://localhost:8000/api/products/deleteproduct', {productid});
+        alert('Product deleted successfully!')
+        console.log(response);
+        window.location.reload()
+    } catch (error) {
+        alert("Error: Product deletion unsuccessful!")
+        console.log(error);
+    }
 }

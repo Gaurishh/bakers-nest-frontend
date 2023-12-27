@@ -1,17 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { getAllProducts } from '../actions/productActions.js';
 import Brownie from '../components/Brownie.js';
 import TubCake from '../components/TubCake.js';
 import DryCake from '../components/DryCake.js';
 import CheeseCake from '../components/CheeseCake.js';
 import JumboCookie from '../components/JumboCookie.js';
 import Fudge from '../components/Fudge.js';
-import { getAllProducts } from '../actions/productActions.js';
 import Loading from '../components/Loading.js';
 import Error from '../components/Error.js';
-import Navbar from '../components/Navbar.js';
 import Filter from "../components/Filter.js";
-
+import Navbar from '../components/Navbar.js';
 const HomeScreen = () => {
 
   const dispatch = useDispatch();

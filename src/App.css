@@ -104,6 +104,26 @@ input{
   font-size: 20px;
 }
 
+.adminFunctions{
+  padding: 10px;
+  background-color: rgb(7, 7, 96);
+}
+
+.adminFunctions li{
+  list-style-type: none !important;
+  display: inline !important;
+  color: white;
+}
+
+.adminFunctions li a{
+  color: white !important;
+  padding: 20px;
+}
+
+td, th, tr{
+  text-align: left;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

@@ -20,6 +20,7 @@ export default function Filter() {
                             <option value="Brownies">Brownies</option>
                             <option value="Tub Cake">Tub Cakes</option>
                             <option value="Dry Cake">Dry Cakes</option>
+                            <option value="Cheese Cake">Cheese Cakes</option>
                             <option value="Jumbo Cookie">Jumbo Cookies</option>
                             <option value="Fudge">Fudges</option>
                         </select>
