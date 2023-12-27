@@ -29,7 +29,7 @@ const Checkout = (props) => {
       handler: async(response) => {
         dispatch({type: 'PLACE_ORDER_REQUEST'})
         try {
-          const verifyUrl = "http://localhost:8000/api/orders/verify";
+          const verifyUrl = "https://bakers-nest.onrender.com/api/orders/verify";
           const {data} = await axios.post(verifyUrl, {response: response, user: user, cartItems: cartState.cartItems, amount: props.subtotal});
           dispatch({type: 'PLACE_ORDER_SUCCESS'})
           dispatch({type: "EMPTY_CART"})
@@ -50,7 +50,7 @@ const Checkout = (props) => {
   const handlePayment = async () => {
 
     try {
-      const orderUrl = "http://localhost:8000/api/orders/placeOrder";
+      const orderUrl = "https://bakers-nest.onrender.com/api/orders/placeOrder";
       const {data} = await axios.post(orderUrl, {amount: props.subtotal})
       initPayment(data.data)
     } catch (error) {
