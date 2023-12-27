@@ -8,7 +8,7 @@ import { Auth0Provider } from '@auth0/auth0-react';
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
-const shopUri = "http://localhost:3000/shop";
+const shopUri = "https://bakers-nest.onrender.com/shop";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
