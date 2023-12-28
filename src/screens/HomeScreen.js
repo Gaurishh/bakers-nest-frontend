@@ -11,11 +11,15 @@ import Loading from '../components/Loading.js';
 import Error from '../components/Error.js';
 import Filter from "../components/Filter.js";
 import Navbar from '../components/Navbar.js';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 const HomeScreen = () => {
 
   const dispatch = useDispatch();
   const productsState = useSelector(state => state.getAllProductsReducer);
   const {products, error, loading} = productsState;
+  AOS.init()
 
   useEffect(()=>{
     dispatch(getAllProducts())
@@ -29,7 +33,7 @@ const HomeScreen = () => {
               <>
                 <Filter />
                 {products.map(product => {
-                  return <div className='col-md-3 m-3' key={product._id}>
+                  return <div className='col-md-3 m-3' key={product._id} data-aos='fade-down'>
                       {product.category === "Brownies" ? <div> <Brownie brownie={product}/> </div> : null}
                       {product.category === "Tub Cake" ? <div> <TubCake tubCake={product}/> </div> : null}
                       {product.category === "Dry Cake" ? <div> <DryCake dryCake={product}/> </div> : null}

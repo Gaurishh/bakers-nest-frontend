@@ -5,7 +5,7 @@ import { addToCart } from "../actions/cartActions.js";
 
 const Brownie = (props) => {
   const [quantity, setQuantity] = useState(1);
-  const [varient, setVariant] = useState("Pack of 4");
+  const [varient, setVariant] = useState("1 Brownie");
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

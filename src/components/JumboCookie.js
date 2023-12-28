@@ -5,7 +5,7 @@ import { addToCart } from "../actions/cartActions.js";
 
 const JumboCookie = (props) => {
   const [quantity, setQuantity] = useState(1);
-  const [varient, setVariant] = useState("1 Cookie");
+  const [varient, setVariant] = useState("1 Jumbo Cookie");
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

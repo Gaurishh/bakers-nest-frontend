@@ -14,7 +14,7 @@ const email2 = process.env.REACT_APP_EMAIL2;
 
 function AdminScreen() {
 
-    const {user, isAuthenticated, isLoading, loginWithRedirect} = useAuth0();
+    const {user, isAuthenticated, isLoading} = useAuth0();
     var isAdmin = false;
 
     const [productToBeEdited, setProductToBeEdited] = useState('');
@@ -25,19 +25,20 @@ function AdminScreen() {
         setPanel('4');
     }
 
-    if(!isAuthenticated){
-        window.location.href = '/shop'
-    }
+    if(!isLoading){
 
-    if(!isLoading && isAuthenticated){
-        var email = user["email"];
-
-        isAdmin = (email===email1 || email===email2);
-
-        if(!isAdmin){
+        if(!isAuthenticated){
             window.location.href = '/shop'
         }
+        else{
+            var email = user["email"];
 
+            isAdmin = (email===email1 || email===email2);
+
+            if(!isAdmin){
+                window.location.href = '/shop'
+            }
+        }
     }
 
     return (

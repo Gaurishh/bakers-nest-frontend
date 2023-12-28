@@ -10,7 +10,6 @@ const EditProduct = (props) => {
 
     const [name, setName] = useState('');
     const [varient1Price, setVarient1Price] = useState();
-    const [varient2Price, setVarient2Price] = useState();
     const [image, setImage] = useState('');
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('Brownies');
@@ -30,7 +29,6 @@ const EditProduct = (props) => {
           setImage(product.image);
           setCategory(product.category);
           setVarient1Price(product.prices[0][product.varients[0]]);
-          setVarient2Price(product.prices[0][product.varients[1]]);
         }
         else{
           dispatch(getProductById(props.id))
@@ -43,9 +41,8 @@ const EditProduct = (props) => {
   
       const editedProduct = {_id: props.id, name, image, description, category, prices: [], varients: []};
       if(category === "Brownies"){
-        const obj = {"Pack of 4": Number(varient1Price), "Pack of 6": Number(varient2Price)};
-        editedProduct.varients.push("Pack of 4");
-        editedProduct.varients.push("Pack of 6");
+        const obj = {"1 Brownie": Number(varient1Price)};
+        editedProduct.varients.push("1 Brownie");
         editedProduct.prices.push(obj);
       }
       else if(category === "Tub Cake"){
@@ -64,8 +61,8 @@ const EditProduct = (props) => {
         editedProduct.prices.push(obj);
       }
       else if(category === "Jumbo Cookie"){
-        const obj = {"1 Cookie": Number(varient1Price)};
-        editedProduct.varients.push("1 Cookie");
+        const obj = {"1 Jumbo Cookie": Number(varient1Price)};
+        editedProduct.varients.push("1 Jumbo Cookie");
         editedProduct.prices.push(obj);
       }
       else if(category === "Fudge"){
@@ -103,8 +100,7 @@ const EditProduct = (props) => {
             <option value="Fudge">Fudge</option>
           </select>
           {category==="Brownies" && <>
-          <input className="form-control" type="text" placeholder="Pack of 4 Price" value={varient1Price} onChange={(e) => {setVarient1Price(e.target.value)}}/>
-          <input className="form-control" type="text" placeholder="Pack of 6 Price" value={varient2Price} onChange={(e) => {setVarient2Price(e.target.value)}}/>
+          <input className="form-control" type="text" placeholder="1 Brownie" value={varient1Price} onChange={(e) => {setVarient1Price(e.target.value)}}/>
           </>}
           {category==="Tub Cake" && <>
           <input className="form-control" type="text" placeholder="1 Tub Cake Price" value={varient1Price} onChange={(e) => {setVarient1Price(e.target.value)}}/>
