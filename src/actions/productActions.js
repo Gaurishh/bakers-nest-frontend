@@ -66,7 +66,17 @@ export const editProduct = (editedProduct) => async dispatch => {
     }
 }
 
-export const deleteProduct = (productid) => async dispatch => {
+export const productVisibility = (productId, value) => async () => {
+    try {
+        const response = await axios.post('https://bakers-nest.onrender.com/api/products/productvisibility', {productId, value});
+        console.log(response);
+    } catch (error) {
+        alert("Error while toggling visibility")
+        console.log(error);
+    }
+}
+
+export const deleteProduct = (productid) => async () => {
     try {
         const response = await axios.post('https://bakers-nest.onrender.com/api/products/deleteproduct', {productid});
         alert('Product deleted successfully!')

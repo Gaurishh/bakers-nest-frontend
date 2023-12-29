@@ -3,7 +3,7 @@ import Loading from "../Loading.js";
 import Error from "../Error.js";
 import Filter from "../Filter.js";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts, deleteProduct } from "../../actions/productActions.js";
+import { getAllProducts, deleteProduct, productVisibility } from "../../actions/productActions.js";
 
 const ProductsList = (props) => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const ProductsList = (props) => {
 
   useEffect(() => {
     dispatch(getAllProducts());
-  }, []);
+  }, [products]);
 
   // console.log(products);
 
@@ -49,6 +49,9 @@ const ProductsList = (props) => {
                   <td>
                     <i className="fa fa-trash m-1" onClick = {() => {dispatch(deleteProduct(product._id))}} style={{cursor:'pointer'}}></i>
                     <i className="fa fa-edit m-1" onClick={() => {props.fnctn(product._id)}} style={{cursor:'pointer'}}></i>
+                    {product.show && <i class="fa fa-eye ml-10" aria-hidden="true" onClick={ () => {dispatch(productVisibility(product._id, false))}} style={{cursor:'pointer'}}></i>}
+                    {!product.show && <i class="fa fa-eye-slash" aria-hidden="true" onClick={() => {dispatch(productVisibility(product._id, true))}} style={{cursor:'pointer'}}></i>}
+                  
                   </td>
                 </tr>
               ))}

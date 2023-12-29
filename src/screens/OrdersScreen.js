@@ -10,7 +10,7 @@ import Navbar from '../components/Navbar.js';
 
 const Ordersscreen = () => {
 
-    const {user} = useAuth0();
+    const {user, isLoading} = useAuth0();
     AOS.init()
     const dispatch = useDispatch()
     const orderstate = useSelector(state=>state.getUserOrdersReducer)
@@ -30,9 +30,8 @@ const Ordersscreen = () => {
             <Navbar />
             <h2 style={{fontSize:'35px'}}>My Orders</h2>
             <hr/>
-            <div className="row justify-content-center">
-                {!user && (<Loading/>)}
-                {/* {error && (<Error error='Something went wrong'/>)} */}
+            {(isLoading || loading) && <Loading />}
+            {!isLoading && !loading && <div className="row justify-content-center">
                 {orders && orders.map(order=>{
                     return <div className="col-md-8 m-2 p-1" data-aos='fade-down'  style={{backgroundColor:'red' , color:'white'}}>
                             <div className="flex-container">
@@ -56,7 +55,7 @@ const Ordersscreen = () => {
                             </div>
                     </div>
                 })}
-            </div>
+            </div>}
         </div>
     )
 }

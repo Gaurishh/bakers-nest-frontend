@@ -33,7 +33,7 @@ const HomeScreen = () => {
               <>
                 <Filter />
                 {products.map(product => {
-                  return <div className='col-md-3 m-3' key={product._id} data-aos='fade-down'>
+                  return product.show && <div className='col-md-3 m-3' key={product._id} data-aos='fade-down'>
                       {product.category === "Brownies" ? <div> <Brownie brownie={product}/> </div> : null}
                       {product.category === "Tub Cake" ? <div> <TubCake tubCake={product}/> </div> : null}
                       {product.category === "Dry Cake" ? <div> <DryCake dryCake={product}/> </div> : null}
