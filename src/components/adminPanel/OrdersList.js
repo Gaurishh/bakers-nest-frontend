@@ -27,6 +27,7 @@ export default function Orderslist() {
               <th>Order Id</th>
               <th>Email</th>
               <th>Amount</th>
+              <th>Items</th>
               <th>Date</th>
               <th>Status</th>
             </tr>
@@ -40,6 +41,7 @@ export default function Orderslist() {
                     <td>{order._id}</td>
                     <td>{order.email}</td>
                     <td>{order.orderAmount}</td>
+                    <td>{order.orderItems.map(item => (<>{item.name} x {item.quantity}</>))}</td>
                     <td>{order.createdAt.substring(0, 10)}</td>
                     <td>
                       {order.isDelivered ? (
