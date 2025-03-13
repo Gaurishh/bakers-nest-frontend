@@ -3,29 +3,39 @@ const initialState = {
     hasMore: true,
   };
   
-  export const getAllProductsReducer = (state = initialState, action) => {
-    switch(action.type){
-      case 'GET_PRODUCTS_REQUEST': 
-        return { ...state, loading: true };
-      case 'GET_PRODUCTS_SUCCESS': {
-        const newProducts = action.payload.filter(
-          product => !state.products.find(p => p._id === product._id)
-        );
+export const getAllProductsReducer = (state = initialState, action) => {
+  switch(action.type){
+    case 'GET_PRODUCTS_REQUEST': 
+      return { ...state, loading: true };
+    case 'GET_PRODUCTS_SUCCESS': {
+      const newProducts = action.payload.filter(
+        product => !state.products.find(p => p._id === product._id)
+      );
 
-        const hasMore = action.payload.length === 3;
-        
-        return { 
-          loading: false, 
-          products: [...state.products, ...newProducts],
-          hasMore,
-        };
-      }
-      case 'GET_PRODUCTS_FAILED': 
-        return { loading: false, error: action.payload };
-      default: 
-        return state;
+      const hasMore = action.payload.length === 3;
+      
+      return { 
+        loading: false, 
+        products: [...state.products, ...newProducts],
+        hasMore,
+      };
     }
-  };
+    case 'GET_PRODUCTS_FAILED': 
+      return { loading: false, error: action.payload };
+    case 'TOGGLE_PRODUCT_VISIBILITY':
+      return {
+        ...state,
+        products: state.products.map(product =>
+          product._id === action.payload.productId 
+            ? { ...product, show: action.payload.value } 
+            : product
+        ),
+      };
+    default: 
+      return state;
+  }
+};
+
 export const getProductByIdReducer = (state={products : []}, action) => {
     switch(action.type){
         case 'GET_PRODUCTBYID_REQUEST': return {

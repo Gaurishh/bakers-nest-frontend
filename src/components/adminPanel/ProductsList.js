@@ -12,10 +12,8 @@ const ProductsList = (props) => {
   const { products, error, loading } = productsState;
 
   useEffect(() => {
-    if (!products || products.length === 0) {
-      dispatch(getAllProducts());
-    }
-  }, [dispatch, products]);
+    dispatch(getAllProducts());
+  }, [dispatch]);
 
   return (
     <div className="App">
