@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllProducts } from '../actions/productActions.js';
+import { getProductsByPage } from '../actions/productActions.js';
 import Brownie from '../components/Brownie.js';
 import TubCake from '../components/TubCake.js';
 import DryCake from '../components/DryCake.js';
@@ -11,42 +11,76 @@ import Loading from '../components/Loading.js';
 import Error from '../components/Error.js';
 import Filter from "../components/Filter.js";
 import Navbar from '../components/Navbar.js';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 
 const HomeScreen = () => {
-
   const dispatch = useDispatch();
   const productsState = useSelector(state => state.getAllProductsReducer);
-  const {products, error, loading} = productsState;
-  AOS.init()
+  const { products, error, loading, hasMore } = productsState;
 
-  useEffect(()=>{
-    dispatch(getAllProducts())
-  }, []);
+  const [skip, setSkip] = useState(0);
+  const limit = 3; 
+  const loaderRef = useRef(null);
 
+  useEffect(() => {
+    dispatch(getProductsByPage(skip, limit));
+  }, [dispatch, skip]);
+
+  const loadMoreProducts = () => {
+    setSkip(prevSkip => prevSkip + limit);
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore && !loading) {
+          loadMoreProducts();
+        }
+      },
+      {
+        root: null,
+        rootMargin: '0px 0px 100px 0px', // triggers 100px before the sentinel is in view
+        threshold: 0.1, // 10% visibility triggers the callback
+      }
+    );
+    if (loaderRef.current) {
+      observer.observe(loaderRef.current);
+    }
+    return () => {
+      if (loaderRef.current) {
+        observer.unobserve(loaderRef.current);
+      }
+    };
+  }, [hasMore, loading]);
+  
   return (
     <div className="App">
-        <Navbar />
-        <div className='row justify-content-center'>
-            {loading ? (<Loading />) : error ? (<Error error="Something went wrong" />) : (
-              <>
-                <Filter />
-                {products.map(product => {
-                  return product.show && <div className='col-md-3 m-3' key={product._id} data-aos='fade-down'>
-                      {product.category === "Brownies" ? <div> <Brownie brownie={product}/> </div> : null}
-                      {product.category === "Tub Cake" ? <div> <TubCake tubCake={product}/> </div> : null}
-                      {product.category === "Dry Cake" ? <div> <DryCake dryCake={product}/> </div> : null}
-                      {product.category === "Cheese Cake" ? <div> <CheeseCake cheeseCake={product}/> </div> : null}
-                      {product.category === "Jumbo Cookie" ? <div> <JumboCookie jumboCookie={product}/> </div> : null}
-                      {product.category === "Fudge" ? <div> <Fudge fudge={product}/> </div> : null}
-                  </div>
-                })}
-              </>
-              )}
-        </div>
+      <Navbar />
+      <div className='row justify-content-center'>
+        {loading && skip === 0 ? (
+          <Loading />
+        ) : error ? (
+          <Error error="Something went wrong" />
+        ) : (
+          <>
+            <Filter />
+            {products.map(product => (
+              product.show && 
+              <div className='col-md-3 m-3' key={product._id}>
+                {product.category === "Brownies" && <Brownie brownie={product} />}
+                {product.category === "Tub Cake" && <TubCake tubCake={product} />}
+                {product.category === "Dry Cake" && <DryCake dryCake={product} />}
+                {product.category === "Cheese Cake" && <CheeseCake cheeseCake={product} />}
+                {product.category === "Jumbo Cookie" && <JumboCookie jumboCookie={product} />}
+                {product.category === "Fudge" && <Fudge fudge={product} />}
+              </div>
+            ))}
+            {loading && skip !== 0 && <Loading />}
+            <div ref={loaderRef} style={{ height: '20px'}}></div>
+          </>
+        )}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default HomeScreen
+export default HomeScreen;

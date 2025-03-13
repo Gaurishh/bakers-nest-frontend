@@ -1,22 +1,31 @@
-export const getAllProductsReducer = (state={products : []}, action) => {
-
+const initialState = {
+    products: [],
+    hasMore: true,
+  };
+  
+  export const getAllProductsReducer = (state = initialState, action) => {
     switch(action.type){
-        case 'GET_PRODUCTS_REQUEST': return {
-            loading: true,
-            ...state
-        }
-        case 'GET_PRODUCTS_SUCCESS': return {
-            loading: false,
-            products: action.payload
-        }
-        case 'GET_PRODUCTS_FAILED': return {
-            loading: false,
-            error: action.payload
-        }
-        default: return state
-    }
-}
+      case 'GET_PRODUCTS_REQUEST': 
+        return { ...state, loading: true };
+      case 'GET_PRODUCTS_SUCCESS': {
+        const newProducts = action.payload.filter(
+          product => !state.products.find(p => p._id === product._id)
+        );
 
+        const hasMore = action.payload.length === 3;
+        
+        return { 
+          loading: false, 
+          products: [...state.products, ...newProducts],
+          hasMore,
+        };
+      }
+      case 'GET_PRODUCTS_FAILED': 
+        return { loading: false, error: action.payload };
+      default: 
+        return state;
+    }
+  };
 export const getProductByIdReducer = (state={products : []}, action) => {
     switch(action.type){
         case 'GET_PRODUCTBYID_REQUEST': return {
@@ -71,4 +80,4 @@ export const editProductReducer = (state={}, action) => {
         }
         default: return state
     }
-}
+  }

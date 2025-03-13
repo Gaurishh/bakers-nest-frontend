@@ -30,8 +30,18 @@ export const getAllProducts = () => async dispatch => {
     } catch (error) {
         dispatch({type: 'GET_PRODUCTS_FAILED', payload: error});
     }
-
 }
+
+export const getProductsByPage = (skip, limit) => async dispatch => {
+    dispatch({ type: 'GET_PRODUCTS_REQUEST' });
+    try {
+        // Pass skip and limit as query parameters
+        const response = await axios.get(`https://bakers-nest.onrender.com/api/products/getproductsbypage?skip=${skip}&limit=${limit}`);
+        dispatch({ type: 'GET_PRODUCTS_SUCCESS', payload: response.data });
+    } catch (error) {
+        dispatch({ type: 'GET_PRODUCTS_FAILED', payload: error });
+    }
+};
 
 export const getProductById = (productid) => async dispatch => {
 
@@ -69,10 +79,8 @@ export const editProduct = (editedProduct) => async dispatch => {
 export const productVisibility = (productId, value) => async () => {
     try {
         const response = await axios.post('https://bakers-nest.onrender.com/api/products/productvisibility', {productId, value});
-        console.log(response);
     } catch (error) {
         alert("Error while toggling visibility")
-        console.log(error);
     }
 }
 
@@ -80,10 +88,8 @@ export const deleteProduct = (productid) => async () => {
     try {
         const response = await axios.post('https://bakers-nest.onrender.com/api/products/deleteproduct', {productid});
         alert('Product deleted successfully!')
-        console.log(response);
         window.location.reload()
     } catch (error) {
         alert("Error: Product deletion unsuccessful!")
-        console.log(error);
     }
 }
