@@ -13,7 +13,7 @@ const ProductsList = (props) => {
 
   useEffect(() => {
     dispatch(getAllProducts());
-  }, [products]);
+  }, []);
 
   // console.log(products);
 
